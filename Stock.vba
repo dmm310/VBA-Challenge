@@ -1,0 +1,63 @@
+Sub Ticker()
+
+Dim ws As Worksheet
+
+For Each ws In Worksheets
+
+    ws.Cells(1, "I").Value = "Ticker Name"
+    ws.Cells(1, "J").Value = "Open Value"
+    ws.Cells(1, "K").Value = "Close Value"
+    ws.Cells(1, "L").Value = "Percent Change"
+    ws.Cells(1, "M").Value = "Total Volume"
+    
+    LastRow = ws.Cells(Rows.Count, "A").End(xlUp).Row
+    
+    Dim Summary_Counter As Integer
+    Summary_Counter = 2
+
+    Dim OpenVal As Double
+    OpenVal = ws.Cells(2, 3).Value
+    
+    Dim Amount As Double
+    Amount = 0
+     
+    For I = 2 To LastRow
+        
+    If ws.Cells(I, 1).Value <> ws.Cells(I + 1, 1).Value Then
+    
+        Amount = Amount + ws.Cells(I, 7).Value
+        
+        Dim CloseVal As Double
+        CloseVal = ws.Cells(I, 6).Value
+        
+        ws.Range("H" & Summary_Counter).Value = ws.Cells(I, 1).Value
+        ws.Range("I" & Summary_Counter).Value = OpenVal
+        ws.Range("J" & Summary_Counter).Value = CloseVal
+        ws.Range("K" & Summary_Counter).Value = (CloseVal - OpenVal) / OpenVal
+        
+        If ws.Range("K" & Summary_Counter).Value < 0 Then
+        ws.Range("K" & Summary_Counter).Interior.ColorIndex = 3
+        Else
+        ws.Range("K" & Summary_Counter).Interior.ColorIndex = 50
+        End If
+        
+        ws.Range("L" & Summary_Counter).Value = Amount
+
+        Amount = 0
+        
+        Summary_Counter = Summary_Counter + 1
+        
+        OpenVal = ws.Cells(I + 1, 3).Value
+      
+      Else
+        Amount = Amount + ws.Cells(I, 7).Value
+           
+    End If
+             
+Next I
+
+Next ws
+
+End Sub
+
+
