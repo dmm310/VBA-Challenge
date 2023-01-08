@@ -4,13 +4,13 @@ Dim ws As Worksheet
 
 For Each ws In Worksheets
 
-    ws.Cells(1, "I").Value = "Ticker Name"
-    ws.Cells(1, "J").Value = "Open Value"
-    ws.Cells(1, "K").Value = "Close Value"
-    ws.Cells(1, "L").Value = "Percent Change"
-    ws.Cells(1, "M").Value = "Total Volume"
+    ws.Cells(1, 8).Value = "Ticker Name"
+    ws.Cells(1, 9).Value = "Open Value"
+    ws.Cells(1, 10).Value = "Close Value"
+    ws.Cells(1, 11).Value = "Percent Change"
+    ws.Cells(1, 12).Value = "Total Volume"
     
-    LastRow = ws.Cells(Rows.Count, "A").End(xlUp).Row
+    LastRow = ws.Cells(Rows.Count, 1).End(xlUp).Row
     
     Dim Summary_Counter As Integer
     Summary_Counter = 2
